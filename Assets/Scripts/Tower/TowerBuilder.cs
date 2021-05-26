@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using IJunior.TypedScenes;
 
-public class TowerBuilder : MonoBehaviour
+public class TowerBuilder : MonoBehaviour, ISceneLoadHandler<int>
 {
-    
+    [SerializeField] private int _levelCount;
     [SerializeField] private float _sizeBetweenPlatforms;
     [SerializeField] private float _additionalScale;
     [SerializeField] private GameObject _beam;
@@ -15,9 +16,14 @@ public class TowerBuilder : MonoBehaviour
     //private float _startAndFinishAdditionalScale = 0.6f;
     //public float BeamScaleY => _levelCount / 2f * _sizeBetweenPlatforms + _startAndFinishAdditionalScale + _additionalScale / 2;
     public float BeamScaleY => (_levelCount / 2f * _sizeBetweenPlatforms) + _additionalScale;
-    private int _levelCount { get; set; }
+    
 
-    private void Awake()
+    public void OnSceneLoaded(int argument)
+    {
+        _levelCount = argument;
+    }
+
+    private void Start()
     {
         Build();
     }

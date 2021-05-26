@@ -2,15 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using IJunior.TypedScenes;
+using TMPro;
+using UnityEngine.UI;
 
 public class Scenes : MonoBehaviour
 {
-    public void ChangeScene(int indexScene)
+    [SerializeField] private Slider numberLevels;
+    [SerializeField] private TextMeshProUGUI numberLevelsText;
+
+    private void Start()
     {
-        SceneManager.LoadSceneAsync(indexScene);
+        ChangeValue();
+    }
+    public void OnPlayButtonClick()
+    {
+        Main_GamePlay.Load((int)numberLevels.value);
+    }
+    public void ChangeValue()
+    {
+        numberLevelsText.text = numberLevels.value.ToString();
     }
     public void Quit()
     {
         Application.Quit();
     }
+    
 }

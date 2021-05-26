@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using IJunior.TypedScenes;
 
 [RequireComponent(typeof(Rigidbody))]
 public class BallJumper : MonoBehaviour
@@ -17,6 +18,10 @@ public class BallJumper : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out PlatformSegment platformSegment) && _rigidbody.velocity.y < 0)
         {
+            if (platformSegment.GetComponentInParent<FinishPlatform>())
+            {
+                _Menu.Load();
+            }
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
         }

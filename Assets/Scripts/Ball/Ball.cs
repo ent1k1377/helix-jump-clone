@@ -8,10 +8,10 @@ public class Ball : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.TryGetComponent(out PlatformSegment platformSegment))
         {
-            platformSegment.GetComponentInParent<Platform>().Break();
-            
+            platformSegment.GetComponentInParent<Platform>().Break();         
         }
     }
     private void OnCollisionEnter(Collision collision)
